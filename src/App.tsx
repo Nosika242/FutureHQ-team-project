@@ -14,61 +14,32 @@ import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const currentUser = await getCurrentUser();
-        setUser(currentUser);
-      } catch (error) {
-        console.error('Failed to load user:', error);
-        // For demo purposes, create a mock user
-        setUser({
-          id: 1,
-          username: 'olivia.rhye',
-          email: 'olivia.rhye@example.com',
-          first_name: 'Olivia',
-          last_name: 'Rhye',
-          profile: {
-            id: 1,
-            avatar: undefined
-          }
-        });
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadUser();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-neutral-50">
-        <LoadingSpinner />
-      </div>
-    );
-  }
+  const [count, setCount] = useState(0)
 
   return (
-    <Router>
-      <div className="App min-h-screen bg-neutral-50">
-        <Layout user={user}>
-          <Routes>
-            <Route path="/" element={<Navigate to="/announcements" replace />} />
-            <Route path="/announcements" element={<AnnouncementsPage />} />
-            <Route path="/classroom" element={<ClassroomPage />} />
-            <Route path="/communities" element={<CommunitiesPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/messages" element={<DirectMessagesPage />} />
-            <Route path="*" element={<Navigate to="/announcements" replace />} />
-          </Routes>
-        </Layout>
+    <>
+      <div>
+        <a href="https://vite.dev" target="_blank">
+          <img src={viteLogo} className="logo" alt="Vite logo" />
+        </a>
+        <a href="https://react.dev" target="_blank">
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        </a>
       </div>
-    </Router>
-  );
+      <h1>Vite + React</h1>
+      <div className="card">
+        <button onClick={() => setCount((count) => count + 1)}>
+          count is {count}
+        </button>
+        <p>
+          Edit <code>src/App.tsx</code> and save to test HMR
+        </p>
+      </div>
+      <p className="read-the-docs">
+        Click on the Vite and React logos to learn more
+      </p>
+    </>
+  )
 }
 
-export default App;
+export default App
