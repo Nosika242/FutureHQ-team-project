@@ -64,12 +64,12 @@ export default function PostHeader({
         </button>
 
         {/* Reply Button */}
-        <button className="p-1 rounded-full hover:bg-gray-100 transition-colors">
+        <button aria-label="Reply" className="p-1 rounded-full hover:bg-gray-100 transition-colors">
           <Reply size={20} className="cursor-pointer hover:text-[#00A58E]" />
         </button>
 
         {/* Share Button */}
-        <button className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors">
+        <button aria-label="Share" className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors">
           <Share2 size={18} />
         </button>
       </div>

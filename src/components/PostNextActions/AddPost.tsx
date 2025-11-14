@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
-
 import axios from 'axios'
 
 interface NewPostProps {
