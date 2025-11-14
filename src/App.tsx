@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { getCurrentUser, User } from './services/api';
 
-// Components
+// Componentsgitn
 import Layout from './components/Layout';
 import AnnouncementsPage from './components/pages/AnnouncementsPage';
 import ClassroomPage from './components/pages/ClassroomPage';
