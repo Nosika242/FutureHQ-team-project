@@ -1,13 +1,11 @@
-// import React from 'react';
-// import CommentDropdown from "./components/CommentDropdown";
-import CommentLayout from "./components/CommentLayout";
-import CommentTextarea from "./components/TextArea";
+import CommentLayout from './pages/CommentLayout';
+import PostPage from './pages/PostPage';
 
 const App = () => {
   return (
     <div>
+      <PostPage />
       <CommentLayout/>
-      <CommentTextarea/>
     </div>
   );
 }

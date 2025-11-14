@@ -1,6 +1,6 @@
 // import React from 'react'
 
-// import CommentSection from "./CommentSection";
+import CommentSection from "../components/CommentSection";
 import Close from "../assets/images/close.png";
 
 export default function CommentLayout() {
@@ -11,7 +11,7 @@ export default function CommentLayout() {
         <img src={Close} alt="close icon" />
       </div>
       <div>
-        {/* <CommentSection /> */}
+        <CommentSection/>
       </div>
     </div>
   );

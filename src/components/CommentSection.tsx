@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import CommentCard from "../pages/CommentCard";
-import CommentTextarea from "./TextArea"; 
+import CommentCard from "./CommentCard";
+import CommentTextarea from "./TextArea";
 import axios from "axios";
 
 interface Comment {
