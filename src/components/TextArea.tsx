@@ -1,4 +1,11 @@
 import React, { useState, useEffect, useRef, FormEvent } from "react";
+import AddCircle from "../assets/images/add_circle.png";
+import TextFormat from "../assets/images/text_format.png";
+import Emoji from "../assets/images/sentiment_satisfied_alt.png";
+import AtSign from "../assets/images/at-sign.png";
+import VoiceChat from "../assets/images/voice_chat.png";
+import Keyboard from "../assets/images/keyboard_voice.png";
+import Send from "../assets/images/Frame 234.png";
 
 interface CommentTextareaProps {
   loading: boolean;
@@ -16,15 +23,16 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({
   const [text, setText] = useState(initialText);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  // Autofocus and scroll into view when editing
   useEffect(() => {
     if (isEditing && textareaRef.current) {
       textareaRef.current.focus();
-      textareaRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      textareaRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   }, [isEditing]);
 
-  // Update textarea content when switching edit targets
   useEffect(() => {
     setText(initialText);
   }, [initialText]);
@@ -33,31 +41,33 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({
     e.preventDefault();
     if (!text.trim()) return;
     await onSubmit(text);
-    if (!isEditing) setText(""); // clear only for new comments
+    if (!isEditing) setText("");
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border-t bg-white">
-      <textarea
-        ref={textareaRef}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder={isEditing ? "Edit your comment..." : "Write a comment..."}
-        rows={3}
-        className="w-full border rounded-md p-2 text-sm focus:ring-2 focus:ring-[#00A58E] outline-none resize-none transition-all duration-200"
-      />
-      <div className="flex justify-end mt-2 gap-2">
-        <button
-          type="submit"
-          disabled={loading}
-          className={`px-4 py-2 rounded-md text-white ${
-            loading
-              ? "bg-[#00A58E]/70 cursor-not-allowed"
-              : "bg-[#00A58E] hover:bg-[#008f7b]"
-          } transition`}
-        >
-          {loading ? "Sending..." : isEditing ? "Update" : "Send"}
-        </button>
+    <form onSubmit={handleSubmit} className="p-4 border-t bg-white w-70">
+      <div>
+        <textarea
+          ref={textareaRef}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Reply..."
+          rows={1}
+          className="flex-1 bg-transparent outline-none resize-none text-sm px-1 text-black"
+        />
+        <div className="flex items-center justify-between ">
+          <div className="flex gap-2 items-center">
+            <img src={AddCircle} alt="" />
+            <img src={TextFormat} alt="" />
+            <img src={Emoji} alt="" />
+            <img src={AtSign} alt="" />
+            <img src={VoiceChat} alt="" />
+            <img src={Keyboard} alt="" />
+          </div>
+          <button type="submit" disabled={loading} className="outline-0">
+            <img src={Send} alt="Send button" />
+          </button>
+        </div>
       </div>
     </form>
   );

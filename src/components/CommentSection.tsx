@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import CommentCard from "../pages/CommentCard"; // Update path to your component folder
-import CommentTextarea from "./TextArea"; // Ensure TextArea.tsx is in the same folder
+import CommentCard from "../pages/CommentCard";
+import CommentTextarea from "./TextArea"; 
 import axios from "axios";
 
 interface Comment {
   id: number;
   content: string;
-  user: { id: number; fullname: string; avatar?: string };
-  created_at?: string;
+  user: { id: number; fullname: string; avatar: string };
+  created_at: string;
 }
 
 interface Props {

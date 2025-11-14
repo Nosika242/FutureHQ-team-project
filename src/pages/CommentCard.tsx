@@ -9,7 +9,7 @@ interface CommentUser {
 
 interface Comment {
   id: number;
-  text: string;
+  content : string;
   user: CommentUser;
   created_at: string;
 }
@@ -17,7 +17,7 @@ interface Comment {
 interface Props {
   comment: Comment;
   articleId: number;
-  onEdit: (comment: Comment) => void;
+  onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
 const CommentCard: React.FC<Props> = ({
@@ -38,20 +38,23 @@ const CommentCard: React.FC<Props> = ({
             alt="user avatar"
           />
           <div>
-            <h3>{comment.user.fullname} </h3>
+            {/* <h3>{comment.user.fullname} </h3> */}
+            <h3>Ogbonna Mitchel</h3>
           </div>
         </div>
         <div>
           <CommentDropdown
-            onEdit={() => onEdit(comment)}
+            onEdit={() => onEdit(comment.id)}
             onDelete={() => onDelete(comment.id)}
           />
         </div>
       </div>
       <div>
-        <h2>{comment.text}</h2>
+        <h2>{comment.content}
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Blanditiis, nesciunt. Earum consequuntur dignissimos labore placeat quos impedit rem suscipit aperiam voluptas mollitia esse expedita error quasi, dolore in odio excepturi!
+        </h2>
       </div>
-      <h2>{comment.created_at}</h2>
+      <h2>{comment.created_at} Lorem ipsum dolor</h2>
     </div>
   );
 };
