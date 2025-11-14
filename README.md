@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# Contributing Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to our project!   
+This document explains how our team collaborates effectively using branches and pull requests.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🧩 Branch Workflow
 
-## React Compiler
+We use the **Branch + Pull Request** method.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Create a New Branch
+Before starting any task:
+```bash
+git checkout main
+git pull origin main
+git checkout -b feature-branch-name
+Branch name format:
 
-## Expanding the ESLint configuration
+Type	Prefix	Example
+New feature	feature/	feature-user-login
+Bug fix	fix/	fix-footer-overlap
+UI update	ui/	ui-navbar-theme
+Documentation	docs/	docs-readme-update
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2###. Commit Guidelines
+Use clear, short messages:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+bash
+Copy code
+git commit -m "Added user login page UI"
+ Examples:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+fix: corrected footer position
+feature: added dark mode toggle
+docs: updated contributing guide
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3###. Push and Open a Pull Request
+      Push your branch:
+bash
+Copy code
+git push origin feature-user-login
+Then open a Pull Request (PR) on GitHub:
+Add a meaningful title and description.
+Tag a teammate as reviewer.
+Wait for at least 1 approval before merging.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+4###. Merging Rules
+Only merge via Pull Requests.
+Use Squash and Merge for clean commit history.
+Never push directly to main.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+5###. Syncing with Main
+Always update your local main branch before new work:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+bash
+Copy code
+git checkout main
+git pull origin main
+Then create a new feature branch.
+
+6###. Code Review Etiquette
+Be respectful and constructive.
+Resolve all comments before merging.
+Approve only if you’ve tested and reviewed the changes.
+
+Thanks for contributing 💙
+Let’s build something amazing together
