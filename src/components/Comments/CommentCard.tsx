@@ -1,6 +1,6 @@
 import React from "react";
 import CommentDropdown from "./CommentDropdown";
-import Avatar from "../assets/images/Avatar profile photo.png"
+import Avatar from "../../assets/images/Avatar profile photo.png"
 
 interface CommentUser {
   id: number;

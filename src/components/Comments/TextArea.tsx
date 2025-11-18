@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef, } from "react";
 import type { FormEvent } from "react";
-import AddCircle from "../assets/images/add_circle.png";
-import TextFormat from "../assets/images/text_format.png";
-import Emoji from "../assets/images/sentiment_satisfied_alt.png";
-import AtSign from "../assets/images/at-sign.png";
-import VoiceChat from "../assets/images/voice_chat.png";
-import Keyboard from "../assets/images/keyboard_voice.png";
-import Send from "../assets/images/Frame 234.png";
+import AddCircle from "../../assets/images/add_circle.png";
+import TextFormat from "../../assets/images/text_format.png";
+import Emoji from "../../assets/images/sentiment_satisfied_alt.png";
+import AtSign from "../../assets/images/at-sign.png";
+import VoiceChat from "../../assets/images/voice_chat.png";
+import Keyboard from "../../assets/images/keyboard_voice.png";
+import Send from "../../assets/images/Frame 234.png";
 
 interface CommentTextareaProps {
   loading: boolean;
