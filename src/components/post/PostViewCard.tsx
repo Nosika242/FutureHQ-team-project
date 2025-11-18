@@ -10,7 +10,7 @@ interface PostViewCardProps {
 
 export function PostViewCard({ post }: PostViewCardProps): React.JSX.Element | null {
   const { user } = usePostContext();
-  if (!post) return null; // Handle the case where post is null or undefined) return null;
+  if (!post) return null; 
 
   return (
     <div className="border-b border-gray-200 pb-6">

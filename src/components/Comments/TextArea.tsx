@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, FormEvent } from "react";
+import React, { useState, useEffect, useRef, } from "react";
+import type { FormEvent } from "react";
 import AddCircle from "../assets/images/add_circle.png";
 import TextFormat from "../assets/images/text_format.png";
 import Emoji from "../assets/images/sentiment_satisfied_alt.png";

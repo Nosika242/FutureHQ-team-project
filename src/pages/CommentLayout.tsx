@@ -1,18 +1,17 @@
-// import React from 'react'
+import React from "react";
+import CommentSection from "../components/Comments/CommentSection";
+// import Close from "../assets/images/close.png";
 
-import CommentSection from "../components/CommentSection";
-import Close from "../assets/images/close.png";
+interface CommentLayoutProps {
+  articleId: number;
+}
 
-export default function CommentLayout() {
+const CommentLayout: React.FC<CommentLayoutProps> = ({ articleId }) => {
   return (
     <div className="w-80">
-      <div className="flex sticky justify-between">
-        <h1>General Announcement</h1>
-        <img src={Close} alt="close icon" />
-      </div>
-      <div>
-        <CommentSection/>
-      </div>
+      <CommentSection articleId={29} />
     </div>
   );
-}
+};
+
+export default CommentLayout;

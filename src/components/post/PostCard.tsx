@@ -54,9 +54,19 @@ export default function PostCard({ post, onLikeToggle }: PostCardProps) {
       />
 
       <div className="mt-3">
-        <PostAction post={post} 
-        handleViewReplies={handleOpenReplies}
-         />
+        <h3 className="text-lg font-bold text-gray-800 mb-1">{post.title}</h3>
+        <p className="text-base text-[#4F5E71] mb-4">
+          {post.text?.slice(0, 400)}...
+        </p>
+
+        {post.image && (
+          <img
+            src={post.image}
+            alt={post.title}
+            className="w-full rounded-xl object-cover shadow-sm max-h-[250px]"
+          />
+        )}
+        <PostAction post={post} handleViewReplies={handleOpenReplies} />
       </div>
     </div>
   );

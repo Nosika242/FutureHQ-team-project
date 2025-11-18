@@ -1,5 +1,6 @@
 import React from "react";
 import CommentDropdown from "./CommentDropdown";
+import Avatar from "../assets/images/Avatar profile photo.png"
 
 interface CommentUser {
   id: number;
@@ -9,7 +10,7 @@ interface CommentUser {
 
 interface Comment {
   id: number;
-  content: string;
+  text: string;
   user: CommentUser;
   created_at: string;
 }
@@ -26,19 +27,15 @@ const CommentCard: React.FC<Props> = ({
   onDelete,
 }) => {
   return (
-    <div>
-      <div>
-        <div>
+    <div className="p-4">
+      <div className="flex justify-between">
+        <div className="flex ">
           <img
-            src={
-              comment.user.avatar ||
-              "./../assets/images/Avatar profile photo.png"
-            }
+            src={comment.user.avatar || Avatar}
             alt="user avatar"
           />
           <div>
-            {/* <h3>{comment.user.fullname} </h3> */}
-            <h3>Ogbonna Mitchel</h3>
+            <h3>{comment.user.fullname} </h3>
           </div>
         </div>
         <div>
@@ -46,14 +43,15 @@ const CommentCard: React.FC<Props> = ({
             onEdit={() => onEdit(comment.id)}
             onDelete={() => onDelete(comment.id)}
           />
+          
         </div>
       </div>
       <div>
         <h2>
-          {comment.content}
+          {comment.text}
         </h2>
       </div>
-      <h2>{comment.created_at}</h2>
+      <h2> {new Date(comment.created_at).toLocaleString()}</h2>
     </div>
   );
 };

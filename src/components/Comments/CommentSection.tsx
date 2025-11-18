@@ -5,7 +5,7 @@ import axios from "axios";
 
 interface Comment {
   id: number;
-  content: string;
+  text: string;
   user: { id: number; fullname: string; avatar: string };
   created_at: string;
 }
@@ -53,7 +53,7 @@ const CommentSection: React.FC<Props> = ({ articleId }) => {
         url,
         method,
         headers: { "Content-Type": "application/json" },
-        data: { content: text },
+        data: { text },
       });
 
       const newComment = res.data;
@@ -81,7 +81,7 @@ const CommentSection: React.FC<Props> = ({ articleId }) => {
     const comment = comments.find((c) => c.id === commentId);
     if (!comment) return;
     setEditingCommentId(commentId);
-    setEditingCommentText(comment.content);
+    setEditingCommentText(comment.text);
   };
 
   // Delete comment
