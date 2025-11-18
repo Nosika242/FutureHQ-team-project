@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import GridDrop from "../assets/images/MoreDropdown.png"
+import GridDrop from "../../assets/images/MoreDropdown.png"
 
 interface Props {
   onEdit: () => void;
