@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Modal from "../Modal";
+import AddPost from "../PostNextActions/AddPost";
 import {
   FaBook,
   FaUsers,
@@ -19,6 +21,7 @@ type ExpandedSections = {
 
 const Sidebar: React.FC = () => {
   const location = useLocation();
+  const [open, setOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
     announcements: true,
     classroom: false,
@@ -51,12 +54,11 @@ const Sidebar: React.FC = () => {
 
           <Link
             to="/dashboard/general-announcements"
-            className={`flex items-center px-3 py-2 rounded-lg mb-1 ${
-              isActive("/dashboard/general-announcements") ||
-              isActive("/dashboard") 
+            className={`flex items-center px-3 py-2 rounded-lg mb-1 ${isActive("/dashboard/general-announcements") ||
+                isActive("/dashboard")
                 ? "bg-aqua text-white"
                 : "text-gray-700 hover:bg-gray-100"
-            }`}
+              }`}
             data-testid="general-announcements-link"
           >
             General Announcements
@@ -64,11 +66,10 @@ const Sidebar: React.FC = () => {
 
           <Link
             to="/dashboard/classroom-announcements"
-            className={`flex items-center px-3 py-2 rounded-lg ${
-              isActive("/dashboard/classroom-announcements")
+            className={`flex items-center px-3 py-2 rounded-lg ${isActive("/dashboard/classroom-announcements")
                 ? "bg-aqua text-white"
                 : "text-gray-700 hover:bg-gray-100"
-            }`}
+              }`}
             data-testid="classroom-announcements-link"
           >
             Class Room Announcements
@@ -86,9 +87,8 @@ const Sidebar: React.FC = () => {
               Classroom
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${
-                expandedSections.classroom ? "rotate-180" : ""
-              }`}
+              className={`text-xs transition-transform ${expandedSections.classroom ? "rotate-180" : ""
+                }`}
             />
           </button>
           {expandedSections.classroom && (
@@ -138,9 +138,8 @@ const Sidebar: React.FC = () => {
               Communities
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${
-                expandedSections.communities ? "rotate-180" : ""
-              }`}
+              className={`text-xs transition-transform ${expandedSections.communities ? "rotate-180" : ""
+                }`}
             />
           </button>
           {expandedSections.communities && (
@@ -179,9 +178,8 @@ const Sidebar: React.FC = () => {
               Projects
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${
-                expandedSections.projects ? "rotate-180" : ""
-              }`}
+              className={`text-xs transition-transform ${expandedSections.projects ? "rotate-180" : ""
+                }`}
             />
           </button>
         </div>
@@ -197,9 +195,8 @@ const Sidebar: React.FC = () => {
               Direct Messages
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${
-                expandedSections.messages ? "rotate-180" : ""
-              }`}
+              className={`text-xs transition-transform ${expandedSections.messages ? "rotate-180" : ""
+                }`}
             />
           </button>
           {expandedSections.messages && (
@@ -228,7 +225,18 @@ const Sidebar: React.FC = () => {
             </div>
           )}
         </div>
+
+        <div
+          onClick={() => { setOpen(true) }}
+          className="flex items-center gap-2 p-2 cursor-pointer text-[#BA5D00] font-semibold hover:bg-[#00A58E] hover:text-white rounded-md transition"
+        >
+          <span className="font-semibold">+  New Post</span>
+        </div>
+
       </div>
+      <Modal isOpen={open} onClose={() => setOpen(false)}>
+        <AddPost onClose={() => setOpen(false)} />
+      </Modal>
     </aside>
   );
 };
