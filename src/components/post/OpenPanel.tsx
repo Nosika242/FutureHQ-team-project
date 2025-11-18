@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import type { Post } from "../../types";
 import { OpenPanelHeader } from "./OpenPanelHeader";
+import CommentSection from "../Comments/CommentSection";
 
 export default function OpenPanel() {
   const { id } = useParams<{ id: string }>();
@@ -62,8 +63,10 @@ export default function OpenPanel() {
       <OpenPanelHeader />
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        <PostViewCard 
-        post={postToDisplay} />
+        <PostViewCard post={postToDisplay} />
+        <div>
+          <CommentSection articleId={postToDisplay.id} />
+        </div>
       </div>
     </div>
   );
