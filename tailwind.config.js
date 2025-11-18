@@ -8,7 +8,12 @@ export default {
     './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        aqua: "#00A58E",
+        coffee: "#BA5D00",
+      },
+    },
   },
   plugins: [],
 };
