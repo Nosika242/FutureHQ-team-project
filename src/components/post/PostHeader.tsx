@@ -27,7 +27,6 @@ export default function PostHeader({
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 sm:gap-y-0 justify-between items-start mb-4">
-      {/* === Author Info === */}
       <div className="flex items-center gap-2">
         <img
           src={author.avatar || "/assets/profile-default.png"}
@@ -45,7 +44,6 @@ export default function PostHeader({
         </div>
       </div>
 
-      {/* === Action Buttons === */}
       <div className="flex sm:justify-end items-center gap-3 flex-wrap text-gray-500 pt-1">
         {/* Like Button */}
         <button
@@ -64,12 +62,18 @@ export default function PostHeader({
         </button>
 
         {/* Reply Button */}
-        <button aria-label="Reply" className="p-1 rounded-full hover:bg-gray-100 transition-colors">
+        <button
+          aria-label="Reply"
+          className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+        >
           <Reply size={20} className="cursor-pointer hover:text-[#00A58E]" />
         </button>
 
         {/* Share Button */}
-        <button aria-label="Share" className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors">
+        <button
+          aria-label="Share"
+          className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors"
+        >
           <Share2 size={18} />
         </button>
       </div>

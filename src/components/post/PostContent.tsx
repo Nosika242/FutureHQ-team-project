@@ -62,7 +62,7 @@ export default function PostContent({posts: postsProp, post, loading: loadingPro
 
   return (
     <div className="w-full">
-      <div className="max-w-9xl mx-auto p-0 sm:p-4 md:p-8">
+      <div className="max-w-9xl mx-auto">
      
         <div className="space-y-6">
           {filteredPosts.map((item) => (
