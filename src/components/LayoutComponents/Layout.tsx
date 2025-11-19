@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </header>
 
 
-        <main className="col-start-2 bg-white overflow-y-auto">
+        <main className="col-start-2 bg-white">
           {children}
         </main>
     </div>
