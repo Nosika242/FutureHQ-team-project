@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { ReactNode } from "react";
-import Navbar from "./Navbar";
+import Navbar from "./navbar";
 import Sidebar from "./Sidebar";
 
 interface LayoutProps {
@@ -22,7 +22,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       </header>
 
 
-        <main className="col-start-2 bg-white overflow-y-auto">
+        <main className="col-start-2 bg-white">
           {children}
         </main>
     </div>
