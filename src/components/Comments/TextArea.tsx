@@ -46,7 +46,7 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 border-t bg-white w-70">
+    <form onSubmit={handleSubmit} className="p-4 bg-white border rounded-md">
       <div>
         <textarea
           ref={textareaRef}

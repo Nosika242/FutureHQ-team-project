@@ -97,18 +97,18 @@ const CommentSection: React.FC<Props> = ({ articleId }) => {
   };
 
   return (
-    <div className="w-full md:w-[400px] bg-white border-l h-full flex flex-col">
+    <div className="w-full bg-white h-full flex flex-col">
       {/* Header */}
-      <div className="p-4 border-b flex justify-between items-center">
-        <h2 className="font-semibold text-gray-800 text-lg">
+      <div className="flex justify-between items-center">
+        <h2 className="font-semibold text-[#252A31] text-sm mb-4">
           Comments ({comments.length})
         </h2>
       </div>
 
       {/* Comments List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="">
         {comments.length === 0 ? (
-          <p className="text-gray-400 text-sm text-center">
+          <p className="text-[#252A31] text-sm text-center">
             No comments yet. Be the first to comment!
           </p>
         ) : (
@@ -125,12 +125,14 @@ const CommentSection: React.FC<Props> = ({ articleId }) => {
       </div>
 
       {/* Comment Textarea */}
+      <div className="sticky bottom-0 top-0">
       <CommentTextarea
         loading={loading}
         isEditing={!!editingCommentId}
         initialText={editingCommentText}
         onSubmit={handleSubmit}
       />
+      </div>
     </div>
   );
 };

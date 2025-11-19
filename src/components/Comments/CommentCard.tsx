@@ -1,6 +1,6 @@
 import React from "react";
 import CommentDropdown from "./CommentDropdown";
-import Avatar from "../../assets/images/Avatar profile photo.png"
+import Avatar from "../../assets/images/Avatar.png"
 
 interface CommentUser {
   id: number;
@@ -27,16 +27,15 @@ const CommentCard: React.FC<Props> = ({
   onDelete,
 }) => {
   return (
-    <div className="p-4">
-      <div className="flex justify-between">
-        <div className="flex ">
+    <div className="p-1 mb-2">
+      <div className="flex justify-between ">
+        <div className="flex items-center gap-3 ">
           <img
             src={comment.user.avatar || Avatar}
             alt="user avatar"
           />
-          <div>
-            <h3>{comment.user.fullname} </h3>
-          </div>
+            <h3 className="font-bold text-black text-sm">{comment.user.fullname} </h3>
+          
         </div>
         <div>
           <CommentDropdown
@@ -47,11 +46,11 @@ const CommentCard: React.FC<Props> = ({
         </div>
       </div>
       <div>
-        <h2>
+        <h2 className="text-xs text-[#4F5E71] font-medium py-4 ">
           {comment.text}
         </h2>
       </div>
-      <h2> {new Date(comment.created_at).toLocaleString()}</h2>
+      <h2 className="text-xs text-[#4A617C] font-medium" > {new Date(comment.created_at).toLocaleString()}</h2>
     </div>
   );
 };
