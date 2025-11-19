@@ -55,9 +55,9 @@ const Sidebar: React.FC = () => {
           <Link
             to="/dashboard/general-announcements"
             className={`flex items-center px-3 py-2 rounded-lg mb-1 ${isActive("/dashboard/general-announcements") ||
-                isActive("/dashboard")
-                ? "bg-aqua text-white"
-                : "text-gray-700 hover:bg-gray-100"
+              isActive("/dashboard")
+              ? "bg-aqua text-white"
+              : "text-gray-700 hover:bg-gray-100"
               }`}
             data-testid="general-announcements-link"
           >
@@ -67,8 +67,8 @@ const Sidebar: React.FC = () => {
           <Link
             to="/dashboard/classroom-announcements"
             className={`flex items-center px-3 py-2 rounded-lg ${isActive("/dashboard/classroom-announcements")
-                ? "bg-aqua text-white"
-                : "text-gray-700 hover:bg-gray-100"
+              ? "bg-aqua text-white"
+              : "text-gray-700 hover:bg-gray-100"
               }`}
             data-testid="classroom-announcements-link"
           >
@@ -202,21 +202,21 @@ const Sidebar: React.FC = () => {
           {expandedSections.messages && (
             <div className="ml-4 mt-1 space-y-1">
               <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
+                <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
                 <div className="flex-1 text-left">
                   <div className="text-sm">Olivia Rhye</div>
                   <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
                 </div>
               </button>
               <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
+                <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
                 <div className="flex-1 text-left">
                   <div className="text-sm">Olivia Rhye</div>
                   <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
                 </div>
               </button>
               <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
+                <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
                 <div className="flex-1 text-left">
                   <div className="text-sm">Olivia Rhye</div>
                   <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>

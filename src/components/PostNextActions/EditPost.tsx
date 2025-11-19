@@ -1,36 +1,57 @@
 import React, { useState } from 'react'
 import type { ChangeEvent, FormEvent } from 'react'
-
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 import Modal from '../Modal'
-
-interface Post {
-  id: number
-  title: string
-  text: string
-  image?: string
-}
+import type { Post } from '../../types'
 
 interface EditPostProps {
-  post: Post;
+  post: Post
 }
 
 interface EditPostData {
-  title: string;
-  text: string;
-  image: File | null;
-  preview: string | null;
+  title: string
+  text: string
+  image: File | null
+  preview: string | null
 }
 
 const EditPost: React.FC<EditPostProps> = ({ post }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
-
   const [formData, setFormData] = useState<EditPostData>({
     title: post?.title || '',
     text: post?.text || '',
     image: null,
     preview: post?.image || null,
+  })
+
+  const queryClient = useQueryClient()
+
+  const mutation = useMutation({
+    mutationFn: async (data: EditPostData) => {
+      const formDataObj = new FormData()
+      formDataObj.append('title', data.title)
+      formDataObj.append('text', data.text)
+      if (data.image) formDataObj.append('image', data.image)
+
+      return axios.patch(
+        `https://titusukpono.pythonanywhere.com/articles/${post.id}`,
+        formDataObj,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      )
+    },
+    onSuccess: (response) => {
+      queryClient.setQueryData(['posts'], (oldPosts: Post[] | undefined) => {
+        if (!oldPosts) return []
+        return oldPosts.map((p) => (p.id === post.id ? response.data : p))
+      })
+      window.location.reload()
+      alert('Post updated successfully!')
+      setIsOpen(false)
+    },
+    onError: () => {
+      alert('Failed to update post')
+    },
   })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -52,31 +73,9 @@ const EditPost: React.FC<EditPostProps> = ({ post }) => {
     }
   }
 
-  const handleEdit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleEdit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setLoading(true)
-
-    try {
-      const data = new FormData()
-      data.append('title', formData.title)
-      data.append('text', formData.text)
-      if (formData.image) data.append('image', formData.image)
-
-      await axios.patch(
-        `https://titusukpono.pythonanywhere.com/articles/${post.id}`,
-        data,
-        { headers: { 'Content-Type': 'multipart/form-data' } }
-      )
-
-      alert('Post Updated Successfully')
-      setIsOpen(false)
-      window.location.reload()
-    } catch (error: any) {
-      alert('Failed to Update')
-      console.error('failed to update', error?.response?.data || error)
-    } finally {
-      setLoading(false)
-    }
+    mutation.mutate(formData)
   }
 
   return (
@@ -123,7 +122,7 @@ const EditPost: React.FC<EditPostProps> = ({ post }) => {
             )}
 
             <input
-            placeholder='Upload Image'
+              aria-label="image"
               type="file"
               accept="image/*"
               onChange={handleImageChange}
@@ -133,10 +132,10 @@ const EditPost: React.FC<EditPostProps> = ({ post }) => {
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={mutation.isPending}
             className="bg-[#00A58E] text-white px-4 py-2 rounded hover:bg-[#008f7a] disabled:opacity-50"
           >
-            {loading ? "Updating..." : "Save Changes"}
+            {mutation.isPending ? 'Updating...' : 'Save Changes'}
           </button>
         </form>
       </Modal>
