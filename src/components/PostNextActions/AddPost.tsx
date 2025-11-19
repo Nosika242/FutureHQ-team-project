@@ -14,7 +14,7 @@ interface PostData {
   image: File | null
 }
 
-// 1️⃣ API function
+
 const addPost = async (postData: PostData): Promise<AxiosResponse> => {
   const formData = new FormData()
   formData.append('title', postData.title)
