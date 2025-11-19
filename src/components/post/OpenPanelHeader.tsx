@@ -1,20 +1,15 @@
-
 import { X } from "lucide-react";
 import usePostContext from "../../hooks/usePostContext";
-// import { useNavigate, useParams } from "react-router-dom";
 
 export function OpenPanelHeader() {
   const { closeReplyPanel } = usePostContext();
-  // const navigate = useNavigate();
- 
 
   const handleClose = () => {
     closeReplyPanel();
-    // navigate(`/announcements/${channel || "general"}`);
   };
 
   return (
-    <div className="p-4 border-b border-gray-200 flex justify-between items-center sticky top-0 bg-white">
+    <div className="p-4 border-b border-[#F5F7F9] flex justify-between items-center sticky top-0 bg-white">
       <h3 className="text-lg font-bold text-gray-900">General Announcements</h3>
       <button
         onClick={handleClose}
@@ -25,3 +20,4 @@ export function OpenPanelHeader() {
     </div>
   );
 }
+
