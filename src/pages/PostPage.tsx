@@ -19,7 +19,7 @@ export default function PostPage(): React.JSX.Element {
             isPanelOpen
               ? "md:flex-1 px-0 pt-0 md:px-6 md:pt-12"
               : "xl:px-30 lg:px-16 md:px-8 md:pt-12 px-4 pt-6"   
-          } h-full bg-[#F5F7F9] overflow-y-auto  `}
+          } h-full bg-[#F5F7F9] overflow-y-auto pb-20`}
         >
           <PostContent />
         </div>
