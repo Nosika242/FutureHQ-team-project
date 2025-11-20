@@ -62,7 +62,7 @@ export default function OpenPanel() {
     <div className="w-full bg-white border-l border-gray-200 h-full  flex flex-col shadow-2xl z-50 transition-transform duration-300">
       <OpenPanelHeader />
 
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-4 space-y-4 no-scrollbar">
         <PostViewCard post={postToDisplay} />
         <div className="">
           <CommentSection articleId={postToDisplay.id} />

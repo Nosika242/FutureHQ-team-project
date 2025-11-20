@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+
+"use client";
+import React, { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import CommentCard from "./CommentCard";
 import CommentTextarea from "./TextArea";
-import axios from "axios";
 
 interface Comment {
   id: number;
@@ -12,126 +14,121 @@ interface Comment {
 
 interface Props {
   articleId: number;
-  onClose?: () => void;
 }
 
 const CommentSection: React.FC<Props> = ({ articleId }) => {
-  const [comments, setComments] = useState<Comment[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [editingCommentId, setEditingCommentId] = useState<number | null>(null);
-  const [editingCommentText, setEditingCommentText] = useState("");
+  const queryClient = useQueryClient();
 
-  // Fetch comments
-  const fetchComments = async () => {
-    try {
-      const res = await axios.get(
+  const [editingId, setEditingId] = useState<number | null>(null);
+  const [editingText, setEditingText] = useState("");
+
+  // Fetch Comments
+  const { data: comments = [] } = useQuery<Comment[]>({
+    queryKey: ["comments", articleId],
+    queryFn: async () => {
+      const res = await fetch(
         `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/`
       );
-      const data = res.data;
-      setComments(Array.isArray(data) ? data : data.results || []);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    }
-  };
+      const data = await res.json();
+      return Array.isArray(data) ? data : data.results || [];
+    },
+  });
 
-  useEffect(() => {
-    fetchComments();
-  }, [articleId]);
+  // Add new comment
+  const addMutation = useMutation({
+    mutationFn: async (text: string) => {
+      const res = await fetch(
+        `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        }
+      );
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comments", articleId] });
+    },
+  });
 
-  // Handle new or edited comment submission
-  const handleSubmit = async (text: string) => {
-    if (!text.trim()) return;
-    setLoading(true);
-    try {
-      const url = editingCommentId
-        ? `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/${editingCommentId}/`
-        : `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/`;
-
-      const method = editingCommentId ? "PATCH" : "POST";
-
-      const res = await axios({
-        url,
-        method,
-        headers: { "Content-Type": "application/json" },
-        data: { text },
-      });
-
-      const newComment = res.data;
-
-      if (editingCommentId) {
-        setComments((prev) =>
-          prev.map((c) => (c.id === editingCommentId ? newComment : c))
-        );
-      } else {
-        setComments((prev) => [newComment, ...prev]);
-      }
-
-      // Reset editing
-      setEditingCommentId(null);
-      setEditingCommentText("");
-    } catch (error) {
-      console.error("Error submitting comment:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  // Set edit mode
-  const handleEdit = (commentId: number) => {
-    const comment = comments.find((c) => c.id === commentId);
-    if (!comment) return;
-    setEditingCommentId(commentId);
-    setEditingCommentText(comment.text);
-  };
+  // Edit comment
+  const editMutation = useMutation({
+    mutationFn: async ({ id, text }: { id: number; text: string }) => {
+      const res = await fetch(
+        `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/${id}/`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        }
+      );
+      return res.json();
+    },
+    onSuccess: () => {
+      setEditingId(null);
+      setEditingText("");
+      queryClient.invalidateQueries({ queryKey: ["comments", articleId] });
+    },
+  });
 
   // Delete comment
-  const handleDelete = async (commentId: number) => {
-    try {
-      await axios.delete(
-        `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/${commentId}/`
+  const deleteMutation = useMutation({
+    mutationFn: async (id: number) => {
+      await fetch(
+        `https://titusukpono.pythonanywhere.com/articles/${articleId}/comments/${id}/`,
+        { method: "DELETE" }
       );
-      setComments((prev) => prev.filter((c) => c.id !== commentId));
-    } catch (error) {
-      console.error("Error deleting comment:", error);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comments", articleId] });
+    },
+  });
+
+  // Submit (Add or Edit)
+  const handleSubmit = async (text: string) => {
+    if (editingId !== null) {
+      return editMutation.mutateAsync({ id: editingId, text });
     }
+    return addMutation.mutateAsync(text);
+  };
+
+  // Start editing
+  const handleEdit = (comment: Comment) => {
+    setEditingId(comment.id);
+    setEditingText(comment.text);
+  };
+
+  // Delete handler
+  const handleDelete = (id: number) => {
+    deleteMutation.mutate(id);
   };
 
   return (
-    <div className="w-full bg-white h-full flex flex-col">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <h2 className="font-semibold text-[#252A31] text-sm mb-4">
-          Comments ({comments.length})
-        </h2>
+    <div className="w-full flex flex-col bg-white h-full">
+      <h2 className="font-semibold text-sm mb-4">
+        Comments ({comments.length})
+      </h2>
+
+      <div>
+        {comments.map((comment) => (
+          <CommentCard
+            key={comment.id}
+            comment={comment}
+            articleId={articleId}
+            onEdit={() => handleEdit(comment)}
+            onDelete={() => handleDelete(comment.id)}
+          />
+        ))}
       </div>
 
-      {/* Comments List */}
-      <div className="">
-        {comments.length === 0 ? (
-          <p className="text-[#252A31] text-sm text-center">
-            No comments yet. Be the first to comment!
-          </p>
-        ) : (
-          comments.map((comment) => (
-            <CommentCard
-              key={comment.id}
-              comment={comment}
-              articleId={articleId}
-              onEdit={() => handleEdit(comment.id)}
-              onDelete={() => handleDelete(comment.id)}
-            />
-          ))
-        )}
-      </div>
-
-      {/* Comment Textarea */}
-      <div className="sticky bottom-0 top-0">
-      <CommentTextarea
-        loading={loading}
-        isEditing={!!editingCommentId}
-        initialText={editingCommentText}
-        onSubmit={handleSubmit}
-      />
+      <div className="sticky bottom-0 bg-white">
+        <CommentTextarea
+          loading={addMutation.isPending || editMutation.isPending}
+          isEditing={editingId !== null}
+          initialText={editingText}
+          onSubmit={handleSubmit}
+        />
       </div>
     </div>
   );
