@@ -8,7 +8,7 @@ const Navbar = ({ onMenuClick }: { onMenuClick: () => void }) => {
     <header className="bg-white border-b border-gray-200 h-16 flex items-center px-6 sticky top-0 z-50">
 
 
-      <button className="lg:hidden mr-4" onClick={onMenuClick}>
+      <button className="lg:hidden mr-4" aria-label="Toggle" onClick={onMenuClick}>
         <FaBars className="text-xl" />
       </button>
 
@@ -31,7 +31,7 @@ const Navbar = ({ onMenuClick }: { onMenuClick: () => void }) => {
 
 
       <div className="flex items-center space-x-6 ml-6">
-        <button className="relative hover:bg-gray-100 p-2 rounded-full">
+        <button className="relative hover:bg-gray-100 p-2 rounded-full" aria-label="Notification">
           <FaBell className="text-gray-700 text-xl" />
         </button>
 
