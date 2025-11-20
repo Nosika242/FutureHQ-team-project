@@ -31,10 +31,10 @@ export default function PostAction({ post, handleViewReplies }: PostActionProps)
     <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-3 sm:gap-0 text-sm pt-0 sm:pt-3">
       <button
         onClick={() => handleViewReplies(post)} 
-        className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 transition-colors focus:outline-none font-semibold justify-start sm:justify-start"
+        className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 transition-colors focus:outline-none font-semibold justify-start sm:justify-start "
         aria-label={`View ${commentCount} replies`}
       >
-        <MessageSquare size={14} />
+        <MessageSquare size={14} className="hover:bg-[#9fe6dc]" />
         <span className="text-xs sm:text-sm">{commentCount} Replies</span>
       </button>
 

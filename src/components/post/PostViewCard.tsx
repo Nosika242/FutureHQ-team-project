@@ -13,8 +13,8 @@ export function PostViewCard({ post }: PostViewCardProps): React.JSX.Element | n
   if (!post) return null; 
 
   return (
-    <div className="border-b border-gray-200 pb-6">
-      <div className="flex items-center gap-2 mb-2">
+    <div className="border-b border-[#E8EDF1] pb-6 p-4">
+      <div className="flex items-center gap-2 mb-2 ">
         <img
           src={post.image || user?.avatar || "/assets/profile-default.png"}
           alt={post.title}
@@ -31,7 +31,7 @@ export function PostViewCard({ post }: PostViewCardProps): React.JSX.Element | n
       </div>
 
       <h4 className="text-base font-bold text-[#4F5E71] mb-1">{post.title}</h4>
-      <p className="text-sm text-[#4F5E71] line-clamp-3">{post.text}</p>
+      <p className="text-base text-[#4F5E71] ">{post.text}</p>
     </div>
   );
 }

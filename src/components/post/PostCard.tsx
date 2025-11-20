@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
 import { DateTime } from "../utilis/DateTime";
 import PostHeader from "./PostHeader";
 import PostAction from "./PostAction";
@@ -13,7 +12,6 @@ interface PostCardProps {
 
 export default function PostCard({ post, onLikeToggle }: PostCardProps) {
   const { openReplyPanel } = usePostContext();
-  // const navigate = useNavigate();
 
   const [isLiked, setIsLiked] = useState(post.has_reacted || false);
   const [likeCount, setLikeCount] = useState(post.reaction || 0);
@@ -24,7 +22,6 @@ export default function PostCard({ post, onLikeToggle }: PostCardProps) {
   }, [post.has_reacted, post.reaction]);
 
   const handleOpenReplies = () => {
-    // navigate(`/announcements/${post.id}`);
     openReplyPanel(post);
   };
 
@@ -44,7 +41,7 @@ export default function PostCard({ post, onLikeToggle }: PostCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300">
+    <div className="bg-white rounded-lg p-6 shadow-sm border border-[#E8EDF1] hover:shadow-md transition-all duration-300">
       <PostHeader
         post={post}
         isLiked={isLiked}
@@ -54,8 +51,8 @@ export default function PostCard({ post, onLikeToggle }: PostCardProps) {
       />
 
       <div className="mt-3">
-        <h3 className="text-lg font-bold text-gray-800 mb-1">{post.title}</h3>
-        <p className="text-base text-[#4F5E71] mb-4">
+        <h3 className="text-lg font-bold text-[#252A31] mb-1">{post.title}</h3>
+        <p className="text-lg text-[#4F5E71] mb-4">
           {post.text?.slice(0, 400)}...
         </p>
 

@@ -1,30 +1,30 @@
-
-import React from "react";
+import React, { useState } from "react";
 import type { ReactNode } from "react";
-import Navbar from './navbar';
-import Sidebar from './Sidebar';
+import Navbar from "./navbar";
+import Sidebar from "./Sidebar";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
+    <div className="h-screen grid overflow-hidden">
 
-      <div className="flex flex-1">
-        <Sidebar />
+      <aside className="row-span-2 bg-gray-100 ">
+        <Sidebar isOpen={sidebarOpen} />
+      </aside>
 
-        <main className="flex-1" >
-          {React.Children.map(children, (child) =>
-            React.isValidElement(child) && child
-          )}
+      <header className="col-start-2 bg-white">
+        <Navbar onMenuClick={() => setSidebarOpen((prev) => !prev)} />
+      </header>
+
+
+        <main className="col-start-2 bg-white">
+          {children}
         </main>
-        
-      </div>
     </div>
   );
 };

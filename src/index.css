@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+<<<<<<< HEAD
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
+=======
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+>>>>>>> 8c2fff928baa64bec30a1e5c4285e73e8d81ecbf
