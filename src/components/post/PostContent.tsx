@@ -78,7 +78,7 @@ export default function PostContent({posts: postsProp, post, loading: loadingPro
       {/* Footer */}
       <div
         className={`relative flex justify-center  transition-all duration-300 ${
-          replyPanelOpen ? "md:w-[90%]" : "w-full"
+          replyPanelOpen ? "md:w-[90%]" : "w-full "
         } mx-auto`}
       >
         <div className="bg-slate-700/90 backdrop-blur-md text-white py-2 px-2 md:p-4 text-center rounded md:rounded-lg shadow-2xl w-full">
