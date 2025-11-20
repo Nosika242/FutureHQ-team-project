@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Modal from "../Modal";
 import AddPost from "../PostNextActions/AddPost";
+
 import {
   FaBook,
   FaUsers,
@@ -19,8 +20,9 @@ type ExpandedSections = {
   messages: boolean;
 };
 
-const Sidebar: React.FC = () => {
+const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
   const location = useLocation();
+
   const [open, setOpen] = useState(false);
   const [expandedSections, setExpandedSections] = useState<ExpandedSections>({
     announcements: true,
@@ -30,47 +32,62 @@ const Sidebar: React.FC = () => {
     messages: false,
   });
 
-  const toggleSection = (section: keyof ExpandedSections) => {
-    setExpandedSections({
-      ...expandedSections,
-      [section]: !expandedSections[section],
-    });
-  };
+  const toggleSection = (section: keyof ExpandedSections) =>
+    setExpandedSections((prev) => ({
+      ...prev,
+      [section]: !prev[section],
+    }));
 
-  const isActive = (path: string): boolean => location.pathname === path;
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <aside
-      className="w-64 bg-white border-r border-gray-200 overflow-y-auto"
-      style={{ height: "calc(100vh - 64px)" }}
+      className={`
+        fixed lg:static 
+        top-0 left-0
+        w-64 h-full bg-white overflow-y-auto border-r border-gray-200
+        transform transition-transform duration-300
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+        lg:translate-x-0
+        z-40
+      `}
       data-testid="sidebar"
     >
-      <div className="p-4">
+      <div className="min-w-0 flex-1 md:flex md:items-center md:justify-between p-4 pb-0">
+        <h1 className="text-2xl font-bold text-primary hidden md:block">
+          Future HQ
+        </h1>
+      </div>
 
-        <div className="mb-2">
+      <hr className="my-4 text-gray-200" />
+
+      <div className="p-4">
+        <div className="mb-4">
           <div className="text-sm font-semibold text-coffee mb-2">
             Announcements
           </div>
 
           <Link
             to="/dashboard/general-announcements"
-            className={`flex items-center px-3 py-2 rounded-lg mb-1 ${isActive("/dashboard/general-announcements") ||
-              isActive("/dashboard")
-              ? "bg-aqua text-white"
-              : "text-gray-700 hover:bg-gray-100"
-              }`}
             data-testid="general-announcements-link"
+            className={`flex items-center px-3 py-2 rounded-lg mb-1 ${
+              isActive("/dashboard/general-announcements") ||
+              isActive("/dashboard")
+                ? "bg-aqua text-white"
+                : "text-gray-700 hover:bg-gray-100"
+            }`}
           >
             General Announcements
           </Link>
 
           <Link
             to="/dashboard/classroom-announcements"
-            className={`flex items-center px-3 py-2 rounded-lg ${isActive("/dashboard/classroom-announcements")
-              ? "bg-aqua text-white"
-              : "text-gray-700 hover:bg-gray-100"
-              }`}
             data-testid="classroom-announcements-link"
+            className={`flex items-center px-3 py-2 rounded-lg ${
+              isActive("/dashboard/classroom-announcements")
+                ? "bg-aqua text-white"
+                : "text-gray-700 hover:bg-gray-100"
+            }`}
           >
             Class Room Announcements
           </Link>
@@ -87,42 +104,29 @@ const Sidebar: React.FC = () => {
               Classroom
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${expandedSections.classroom ? "rotate-180" : ""
-                }`}
+              className={`text-xs transition-transform ${
+                expandedSections.classroom ? "rotate-180" : ""
+              }`}
             />
           </button>
+
           {expandedSections.classroom && (
             <div className="ml-4 mt-1 space-y-1">
-              <Link
-                to="/dashboard/course-outlines"
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-              >
-                Course Outlines
-              </Link>
-              <Link
-                to="/dashboard/class-schedule"
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-              >
-                Class Schedule
-              </Link>
-              <Link
-                to="/dashboard/assignments"
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-              >
-                Assignments
-              </Link>
-              <Link
-                to="/dashboard/my-grades"
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-              >
-                My Grades
-              </Link>
-              <Link
-                to="/dashboard/class-resources"
-                className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
-              >
-                Class Resources
-              </Link>
+              {[
+                { to: "/dashboard/course-outlines", label: "Course Outlines" },
+                { to: "/dashboard/class-schedule", label: "Class Schedule" },
+                { to: "/dashboard/assignments", label: "Assignments" },
+                { to: "/dashboard/my-grades", label: "My Grades" },
+                { to: "/dashboard/class-resources", label: "Class Resources" },
+              ].map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                >
+                  {item.label}
+                </Link>
+              ))}
             </div>
           )}
         </div>
@@ -138,10 +142,12 @@ const Sidebar: React.FC = () => {
               Communities
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${expandedSections.communities ? "rotate-180" : ""
-                }`}
+              className={`text-xs transition-transform ${
+                expandedSections.communities ? "rotate-180" : ""
+              }`}
             />
           </button>
+
           {expandedSections.communities && (
             <div className="ml-4 mt-1 space-y-1">
               <Link
@@ -153,12 +159,14 @@ const Sidebar: React.FC = () => {
                   +10
                 </span>
               </Link>
+
               <Link
                 to="/dashboard/design-2023"
                 className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
               >
                 Design 2023
               </Link>
+
               <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
                 <FaPlus className="mr-2 text-xs" />
                 Create a Community
@@ -178,8 +186,9 @@ const Sidebar: React.FC = () => {
               Projects
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${expandedSections.projects ? "rotate-180" : ""
-                }`}
+              className={`text-xs transition-transform ${
+                expandedSections.projects ? "rotate-180" : ""
+              }`}
             />
           </button>
         </div>
@@ -195,45 +204,38 @@ const Sidebar: React.FC = () => {
               Direct Messages
             </div>
             <FaChevronDown
-              className={`text-xs transition-transform ${expandedSections.messages ? "rotate-180" : ""
-                }`}
+              className={`text-xs transition-transform ${
+                expandedSections.messages ? "rotate-180" : ""
+              }`}
             />
           </button>
+
           {expandedSections.messages && (
             <div className="ml-4 mt-1 space-y-1">
-              <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
-                <div className="flex-1 text-left">
-                  <div className="text-sm">Olivia Rhye</div>
-                  <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
-                </div>
-              </button>
-              <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
-                <div className="flex-1 text-left">
-                  <div className="text-sm">Olivia Rhye</div>
-                  <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
-                </div>
-              </button>
-              <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
-                <div className="flex-1 text-left">
-                  <div className="text-sm">Olivia Rhye</div>
-                  <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
-                </div>
-              </button>
+              {[1, 2, 3].map((i) => (
+                <button
+                  key={i}
+                  className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                >
+                  <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
+                  <div className="flex-1 text-left">
+                    <div className="text-sm">Olivia Rhye</div>
+                    <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
+                  </div>
+                </button>
+              ))}
             </div>
           )}
         </div>
 
         <div
-          onClick={() => { setOpen(true) }}
+          onClick={() => setOpen(true)}
           className="flex items-center gap-2 p-2 cursor-pointer text-[#BA5D00] font-semibold hover:bg-[#00A58E] hover:text-white rounded-md transition"
         >
-          <span className="font-semibold">+  New Post</span>
+          <span className="font-semibold">+ New Post</span>
         </div>
-
       </div>
+
       <Modal isOpen={open} onClose={() => setOpen(false)}>
         <AddPost onClose={() => setOpen(false)} />
       </Modal>
