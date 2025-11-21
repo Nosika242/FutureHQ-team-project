@@ -5,19 +5,14 @@ const Navbar = ({ onMenuClick }: { onMenuClick: () => void }) => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
 
   return (
-    <header
-      className="bg-white border-b border-gray-200 h-16 flex items-center px-6 sticky top-0 z-50"
-      data-testid="header"
-    >
+    <header className="bg-white border-b border-gray-200 h-16 flex items-center px-6 sticky top-0 z-50">
 
-      <button
-        className="lg:hidden mr-4"
-        onClick={onMenuClick}
-      >
+
+      <button className="lg:hidden mr-4 cursor-pointer" aria-label="Toggle" onClick={onMenuClick}>
         <FaBars className="text-xl" />
       </button>
 
-      <div className="ml-12 text-xl font-semibold text-gray-800">
+      <div className="ml-12 pe-5 text-xl font-semibold text-gray-800">
         General Announcements
       </div>
 
@@ -34,10 +29,7 @@ const Navbar = ({ onMenuClick }: { onMenuClick: () => void }) => {
       </div>
 
       <div className="flex items-center space-x-6 ml-6">
-        <button
-          className="relative hover:bg-gray-100 p-2 rounded-full"
-          data-testid="notification-button"
-        >
+        <button className="relative hover:bg-gray-100 p-2 rounded-full">
           <FaBell className="text-gray-700 text-xl" />
         </button>
 

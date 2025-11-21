@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="h-screen grid overflow-hidden">
-      <aside className="row-span-2 bg-gray-100 hidden md:block">
+      <aside className="row-span-2 bg-gray-100 ">
         <Sidebar isOpen={sidebarOpen} />
       </aside>
 
