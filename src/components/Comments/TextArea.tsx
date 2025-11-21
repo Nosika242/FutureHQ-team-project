@@ -12,7 +12,7 @@ interface CommentTextareaProps {
   loading: boolean;
   initialText?: string;
   onSubmit: (text: string) => Promise<void> | void;
-  isEditing?: boolean;
+  isEditing: boolean;
 }
 
 const CommentTextarea: React.FC<CommentTextareaProps> = ({
@@ -46,7 +46,7 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 bg-white border rounded-md">
+    <form onSubmit={handleSubmit} className="p-2 bg-white border rounded-md">
       <div>
         <textarea
           ref={textareaRef}
@@ -54,7 +54,7 @@ const CommentTextarea: React.FC<CommentTextareaProps> = ({
           onChange={(e) => setText(e.target.value)}
           placeholder="Reply..."
           rows={1}
-          className="flex-1 bg-transparent outline-none resize-none text-sm px-1 text-black"
+          className="flex-1 w-full bg-transparent outline-none resize-none text-sm px-1 no-scrollbar text-black"
         />
         <div className="flex items-center justify-between ">
           <div className="flex gap-2 items-center">

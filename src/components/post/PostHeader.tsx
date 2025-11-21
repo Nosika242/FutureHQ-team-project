@@ -63,7 +63,7 @@ export default function PostHeader({
         {/* Reply Button */}
         <button
           aria-label="Reply"
-          className="p-1 rounded-full hover:bg-gray-100 transition-colors lg:block hidden"
+          className="p-1 rounded-full hover:bg-gray-100 transition-colors md:block hidden"
         >
           <Reply size={20} className="cursor-pointer hover:text-[#00A58E]" />
         </button>
@@ -71,7 +71,7 @@ export default function PostHeader({
         {/* Share Button */}
         <button
           aria-label="Share"
-          className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors hidden lg:block"
+          className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors hidden md:block"
         >
           <Share2 size={18} />
         </button>

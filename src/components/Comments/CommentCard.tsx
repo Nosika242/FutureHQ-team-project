@@ -33,6 +33,7 @@ const CommentCard: React.FC<Props> = ({
           <img
             src={comment.user.avatar || Avatar}
             alt="user avatar"
+            className="rounded-full w-8 h-8 object-cover"
           />
             <h3 className="font-bold text-black text-sm">{comment.user.fullname} </h3>
           

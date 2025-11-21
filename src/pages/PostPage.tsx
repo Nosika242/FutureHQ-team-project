@@ -18,12 +18,12 @@ export default function PostPage(): React.JSX.Element {
           className={`flex-1 ${
             isPanelOpen
               ? "md:flex-1 px-0 pt-0 md:px-6 md:pt-12"
-              : "xl:px-30 lg:px-6 md:px-5 md:pt-12 px-4 pt-6"   
+              : "xl:px-30 lg:px-6 md:px-5 md:pt-12 px-4 pt-6"
           } h-full bg-[#F5F7F9]  overflow-y-auto pb-8 xl:pb-10`}
         >
           <PostContent />
         </div>
-           
+
         {/* 2. Desktop Sidebar View */}
         {isPanelOpen && (
           <div className="hidden md:block xl:w-[360px] md:w-[280px] md:flex-shrink-0">
