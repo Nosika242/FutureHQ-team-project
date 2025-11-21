@@ -45,7 +45,6 @@ export default function PostHeader({
       </div>
 
       <div className="flex sm:justify-end items-center gap-3 flex-wrap text-gray-500 pt-1">
-        {/* Like Button */}
         <button
           onClick={handleLikeToggle}
           className={`flex items-center gap-1 cursor-pointer transition-colors ${
