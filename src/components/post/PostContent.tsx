@@ -10,7 +10,7 @@ interface PostContentProps {
   error?: string | null;
 }
 
-export default function PostContent({posts: postsProp, post, loading: loadingProp, error: errorProp,}: PostContentProps) {
+export default function PostContent({posts: postsProp, loading: loadingProp, error: errorProp,}: PostContentProps) {
   const {searchQuery, reactToPost, replyPanelOpen, posts: contextPosts,       
     loading: contextLoading,    
     error: contextError, } = usePostContext();
@@ -28,17 +28,17 @@ export default function PostContent({posts: postsProp, post, loading: loadingPro
   if (finalError) {
     return <p className="text-center mt-5 text-red-500">{finalError}</p>;
   }
-  if (post) {
-    return (
-      <div className="max-w-4xl mx-auto p-4 sm:p-6">
-        <PostCard
-          key={post.id}
-          post={post}
-          onLikeToggle={reactToPost}
-        />
-      </div>
-    );
-  }
+  // if (post) {
+  //   return (
+  //     <div className="max-w-4xl mx-auto p-4 sm:p-6">
+  //       <PostCard
+  //         key={post.id}
+  //         post={post}
+  //         onLikeToggle={reactToPost}
+  //       />
+  //     </div>
+  //   );
+  // }
 
   //  Article List View (for /announcement)
   const filteredPosts = (finalPosts || []).filter((item) => {

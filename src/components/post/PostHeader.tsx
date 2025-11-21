@@ -45,7 +45,6 @@ export default function PostHeader({
       </div>
 
       <div className="flex sm:justify-end items-center gap-3 flex-wrap text-gray-500 pt-1">
-        {/* Like Button */}
         <button
           onClick={handleLikeToggle}
           className={`flex items-center gap-1 cursor-pointer transition-colors ${
@@ -64,7 +63,7 @@ export default function PostHeader({
         {/* Reply Button */}
         <button
           aria-label="Reply"
-          className="p-1 rounded-full hover:bg-gray-100 transition-colors md:block hidden"
+          className="p-1 rounded-full hover:bg-gray-100 transition-colors lg:block hidden"
         >
           <Reply size={20} className="cursor-pointer hover:text-[#00A58E]" />
         </button>
@@ -72,7 +71,7 @@ export default function PostHeader({
         {/* Share Button */}
         <button
           aria-label="Share"
-          className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors hidden md:block"
+          className="p-1 rounded-full text-gray-400 hover:bg-gray-100 hover:text-emerald-500 transition-colors hidden lg:block"
         >
           <Share2 size={18} />
         </button>

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { FaBell, FaSearch, FaChevronDown, FaBars } from "react-icons/fa";
+import usePostContext from "../../hooks/usePostContext";
 
 const Navbar = ({ onMenuClick }: { onMenuClick: () => void }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+   const { searchQuery, setSearchQueryState } = usePostContext();
 
   return (
     <header className="bg-white border-b border-gray-200 h-16 flex items-center px-6 sticky top-0 z-50">
@@ -24,6 +26,8 @@ const Navbar = ({ onMenuClick }: { onMenuClick: () => void }) => {
           <input
             type="text"
             placeholder="Search for anything here..."
+            value={searchQuery}
+            onChange={(e) => setSearchQueryState(e.target.value)}
             className="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none"
           />
         </div>

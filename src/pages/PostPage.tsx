@@ -12,14 +12,14 @@ export default function PostPage(): React.JSX.Element {
 
   return (
     <section className="h-full min-h-screen md:h-[calc(100vh-80px)] flex flex-col z-50 transition-transform duration-300 w-full">
-      <div className="flex relative flex-1  overflow-hidden ">
+      <div className="flex relative flex-1 overflow-hidden">
         {/* 1. Main Content Area */}
         <div
           className={`flex-1 ${
             isPanelOpen
               ? "md:flex-1 px-0 pt-0 md:px-6 md:pt-12"
-              : "xl:px-30 lg:px-16 md:px-8 md:pt-12 px-4 pt-6"   
-          } h-full bg-[#F5F7F9] overflow-y-auto pb-26`}
+              : "xl:px-30 lg:px-6 md:px-5 md:pt-12 px-4 pt-6"   
+          } h-full bg-[#F5F7F9]  overflow-y-auto pb-8 xl:pb-10`}
         >
           <PostContent />
         </div>

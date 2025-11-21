@@ -28,17 +28,23 @@ export default function PostAction({ post, handleViewReplies }: PostActionProps)
   }, [post.id, fetchCommentCount]); 
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 items-center gap-3 sm:gap-0 text-sm pt-0 sm:pt-3">
+    // <div className="flex items-center gap-3 sm:gap-0 text-sm pt-0 sm:pt-3">
+    // <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm pt-2"> 
+     <div className="flex items-center justify-between gap-2 text-sm pt-2 w-full flex-nowrap">
+    
       <button
         onClick={() => handleViewReplies(post)} 
-        className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 transition-colors focus:outline-none font-semibold justify-start sm:justify-start "
+        // className="flex items-center gap-2 text-blue-600 hover:text-blue-800 transition-colors focus:outline-none font-semibold justify-start sm:justify-start "
+         className="flex items-center gap-1 text-blue-600 hover:text-blue-800 transition-colors font-semibold"
         aria-label={`View ${commentCount} replies`}
       >
         <MessageSquare size={14} className="hover:bg-[#9fe6dc]" />
         <span className="text-xs sm:text-sm">{commentCount} Replies</span>
       </button>
 
-      <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3 justify-between sm:justify-end text-gray-500 text-xs sm:text-sm">
+      {/* <div className="flex flex-wrap sm:flex-nowrap items-center gap-2 sm:gap-3 justify-between sm:justify-end text-gray-500 text-xs sm:text-sm"> */}
+        {/* <div className="flex items-center flex-wrap sm:flex-nowrap gap-3 text-gray-500 text-xs sm:text-sm "> */}
+            <div className="flex items-center gap-3 flex-nowrap">
         <DeletePost post={post} />
         <EditPost post={post} />
        
