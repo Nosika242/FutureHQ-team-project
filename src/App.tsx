@@ -1,5 +1,5 @@
-import AppWrapper from "./components/LayoutComponents/AppWrapper";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AppWrapper from './components/LayoutComponents/AppWrapper';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 function App() {
   return (

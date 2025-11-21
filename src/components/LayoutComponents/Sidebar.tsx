@@ -43,34 +43,37 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
     <>
       <div
         className={`
-        fixed lg:static top-0 left-0
-        w-64 h-full bg-white border-r border-gray-200
-        transform transition-transform duration-300
+        h-screen bg-white border-r border-gray-200 overflow-y-auto
+        fixed lg:relative top-0 left-0 z-40
+        w-64 transform transition-transform duration-300
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
         lg:translate-x-0
-        z-40
       `}
         data-testid="sidebar"
       >
-        <div className="p-4">
-          <div className='flex justify-between items-center border-b border-[#BAC7D5]  pb-3.5 mb-4'>
-            <h1 className='text-[#00A58E] text-2xl font-bold'>
-              Future HQ
-            </h1>
-          </div>
+        <div className="min-w-0 flex-1 md:flex md:items-center md:justify-between p-4 pb-0">
+          {" "}
+          <h1 className="text-2xl font-bold text-[#00A58E] hidden md:block">
+            {" "}
+            Future HQ{" "}
+          </h1>{" "}
+        </div>
+        <hr className="my-4 text-gray-200" />
 
-          <div className="mb-2">
-            <div className="text-sm font-semibold text-coffee mb-2 text-[#BA5D00]">
+        <div className="p-4">
+          <div className="mb-2 pt-2">
+            <div className="text-sm font-semibold text-[#BA5D00] mb-2">
               Announcements
             </div>
 
             <Link
               to="/dashboard/general-announcements"
-              className={`flex items-center px-3 py-2 rounded-lg mb-1 ${isActive("/dashboard/general-announcements") ||
+              className={`flex items-center px-3 py-2 rounded-lg mb-1 ${
+                isActive("/dashboard/general-announcements") ||
                 isActive("/dashboard")
-                ? "bg-[#00A58E] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-                }`}
+                  ? "bg-[#00A58E] text-white"
+                  : "text-gray-700 hover:bg-[#00A58E] hover:text-white"
+              }`}
               data-testid="general-announcements-link"
             >
               General Announcements
@@ -78,10 +81,11 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
 
             <Link
               to="/dashboard/classroom-announcements"
-              className={`flex items-center px-3 py-2 rounded-lg ${isActive("/dashboard/classroom-announcements")
-                ? "bg-[#00A58E] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-                }`}
+              className={`flex items-center px-3 py-2 rounded-lg ${
+                isActive("/dashboard/classroom-announcements")
+                  ? "bg-[#00A58E] text-white"
+                  : "text-gray-700 hover:bg-[#00A58E] hover:text-white"
+              }`}
               data-testid="classroom-announcements-link"
             >
               Class Room Announcements
@@ -94,13 +98,14 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
               className="flex items-center justify-between w-full px-3 py-2 text-left text-sm font-semibold text-coffee hover:bg-gray-50 rounded"
               data-testid="classroom-section-toggle"
             >
-              <div className="flex items-center text-[#BA5D00]">
-                <FaBook className="mr-2 font-[] " />
+              <div className="flex text-[#BA5D00] items-center">
+                <FaBook className="mr-2" />
                 Classroom
               </div>
               <FaChevronDown
-                className={`text-xs transition-transform ${expandedSections.classroom ? "rotate-180" : ""
-                  }`}
+                className={`text-xs transition-transform ${
+                  expandedSections.classroom ? "rotate-180" : ""
+                }`}
               />
             </button>
             {expandedSections.classroom && (
@@ -145,13 +150,14 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
               className="flex items-center justify-between w-full px-3 py-2 text-left text-sm font-semibold text-coffee hover:bg-gray-50 rounded"
               data-testid="communities-section-toggle"
             >
-              <div className="flex items-center text-[#BA5D00]">
+              <div className="flex text-[#BA5D00] items-center">
                 <FaUsers className="mr-2" />
                 Communities
               </div>
               <FaChevronDown
-                className={`text-xs transition-transform ${expandedSections.communities ? "rotate-180" : ""
-                  }`}
+                className={`text-xs transition-transform ${
+                  expandedSections.communities ? "rotate-180" : ""
+                }`}
               />
             </button>
             {expandedSections.communities && (
@@ -185,13 +191,14 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
               className="flex items-center justify-between w-full px-3 py-2 text-left text-sm font-semibold text-coffee hover:bg-gray-50 rounded"
               data-testid="projects-section-toggle"
             >
-              <div className="flex items-center text-[#BA5D00]">
+              <div className="flex text-[#BA5D00] items-center">
                 <FaProjectDiagram className="mr-2" />
                 Projects
               </div>
               <FaChevronDown
-                className={`text-xs transition-transform ${expandedSections.projects ? "rotate-180" : ""
-                  }`}
+                className={`text-xs transition-transform ${
+                  expandedSections.projects ? "rotate-180" : ""
+                }`}
               />
             </button>
           </div>
@@ -202,33 +209,34 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
               className="flex items-center justify-between w-full px-3 py-2 text-left text-sm font-semibold text-coffee hover:bg-gray-50 rounded"
               data-testid="messages-section-toggle"
             >
-              <div className="flex items-center text-[#BA5D00]">
+              <div className="flex text-[#BA5D00] items-center">
                 <FaEnvelope className="mr-2" />
                 Direct Messages
               </div>
               <FaChevronDown
-                className={`text-xs transition-transform ${expandedSections.messages ? "rotate-180" : ""
-                  }`}
+                className={`text-xs transition-transform ${
+                  expandedSections.messages ? "rotate-180" : ""
+                }`}
               />
             </button>
             {expandedSections.messages && (
               <div className="ml-4 mt-1 space-y-1">
                 <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                  <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
+                  <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
                   <div className="flex-1 text-left">
                     <div className="text-sm">Olivia Rhye</div>
                     <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
                   </div>
                 </button>
                 <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                  <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
+                  <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
                   <div className="flex-1 text-left">
                     <div className="text-sm">Olivia Rhye</div>
                     <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
                   </div>
                 </button>
                 <button className="flex items-center w-full px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">
-                  <div className="w-6 h-6 bg-primary rounded-full mr-2 shrink-0"></div>
+                  <div className="w-6 h-6 bg-primary rounded-full mr-2 flex-shrink-0"></div>
                   <div className="flex-1 text-left">
                     <div className="text-sm">Olivia Rhye</div>
                     <div className="w-2 h-2 bg-green-500 rounded-full inline-block"></div>
@@ -239,12 +247,13 @@ const Sidebar: React.FC<{ isOpen: boolean }> = ({ isOpen }) => {
           </div>
 
           <div
-            onClick={() => { setOpen(true) }}
+            onClick={() => {
+              setOpen(true);
+            }}
             className="flex items-center gap-2 p-2 cursor-pointer text-[#BA5D00] font-semibold hover:bg-[#00A58E] hover:text-white rounded-md transition"
           >
-            <span className="font-semibold">+  New Post</span>
+            <span className="font-semibold">+ New Post</span>
           </div>
-
         </div>
       </div>
       <div>
