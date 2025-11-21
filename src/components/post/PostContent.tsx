@@ -28,18 +28,7 @@ export default function PostContent({posts: postsProp, loading: loadingProp, err
   if (finalError) {
     return <p className="text-center mt-5 text-red-500">{finalError}</p>;
   }
-  // if (post) {
-  //   return (
-  //     <div className="max-w-4xl mx-auto p-4 sm:p-6">
-  //       <PostCard
-  //         key={post.id}
-  //         post={post}
-  //         onLikeToggle={reactToPost}
-  //       />
-  //     </div>
-  //   );
-  // }
-
+  
   //  Article List View (for /announcement)
   const filteredPosts = (finalPosts || []).filter((item) => {
     const query = searchQuery.toLowerCase();

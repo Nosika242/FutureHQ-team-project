@@ -12,7 +12,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="h-screen grid grid-rows-[auto_1fr]">
-  
       <aside className="row-span-2 bg-gray-100 ">
         <Sidebar isOpen={sidebarOpen} />
       </aside>
@@ -21,10 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Navbar onMenuClick={() => setSidebarOpen((prev) => !prev)} />
       </header>
 
-
-        <main className="">
-          {children}
-        </main>
+      <main className="">{children}</main>
     </div>
   );
 };
