@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import type { ReactNode } from "react";
-import Navbar from "./navbar";
-import Sidebar from "./Sidebar";
+import Navbar from './navbar';
+import Sidebar from './Sidebar';
 
 interface LayoutProps {
   children: ReactNode;
@@ -12,7 +12,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="h-screen grid overflow-hidden">
-
       <aside className="row-span-2 bg-gray-100 ">
         <Sidebar isOpen={sidebarOpen} />
       </aside>
@@ -21,10 +20,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <Navbar onMenuClick={() => setSidebarOpen((prev) => !prev)} />
       </header>
 
+      <main className="col-start-2 overflow-y-auto bg-white">
+        {children}
+      </main>
 
-        <main className="col-start-2 bg-white">
-          {children}
-        </main>
     </div>
   );
 };
