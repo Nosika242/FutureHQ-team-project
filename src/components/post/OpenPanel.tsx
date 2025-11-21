@@ -60,8 +60,11 @@ export default function OpenPanel() {
       <div className="flex-1 overflow-y-auto space-y-4">
         
         <PostViewCard post={postToDisplay} />
-      
+        <div className="px-4">
         <CommentSection articleId={postToDisplay.id} />
+
+        </div>
+      
       </div>
     </div>
   );
